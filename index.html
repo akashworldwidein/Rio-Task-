@@ -4,47 +4,236 @@
 <meta charset="UTF-8">
 <title>Rio Task</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+  --bg:#f2f2f7;
+  --card:#ffffffcc;
+  --text:#000;
+  --accent:#007aff;
+  --blur:blur(20px);
+}
+
+body.dark{
+  --bg:#000;
+  --card:#1c1c1ecc;
+  --text:#fff;
+  --accent:#0a84ff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display";
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+}
+
+.app{
+  width:100%;
+  max-width:390px;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#0000, #0001);
+  backdrop-filter:var(--blur);
+  position:relative;
+  padding-bottom:80px;
+}
+
+/* Header */
+header{
+  padding:20px;
+  font-size:28px;
+  font-weight:700;
+}
+
+/* Card */
+.card{
+  margin:15px;
+  background:var(--card);
+  border-radius:20px;
+  padding:15px;
+  backdrop-filter:var(--blur);
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+/* Task Input */
+.task-input{
+  display:flex;
+  gap:10px;
+}
+
+.task-input input{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+  background:#e5e5ea;
+}
+
+.task-input button{
+  padding:12px 16px;
+  border:none;
+  border-radius:14px;
+  background:var(--accent);
+  color:white;
+}
+
+/* Task List */
+ul{
+  list-style:none;
+  margin-top:10px;
+}
+
+li{
+  padding:12px;
+  border-radius:14px;
+  background:#e5e5ea;
+  margin-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* Settings */
+.setting{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+  font-size:16px;
+}
+
+/* Toggle */
+.switch{
+  width:46px;
+  height:26px;
+  background:#ccc;
+  border-radius:20px;
+  position:relative;
+  cursor:pointer;
+}
+.switch::after{
+  content:"";
+  width:22px;
+  height:22px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  top:2px;
+  left:2px;
+  transition:.3s;
+}
+body.dark .switch{
+  background:var(--accent);
+}
+body.dark .switch::after{
+  left:22px;
+}
+
+/* Bottom Tab */
+.tabbar{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  max-width:390px;
+  background:var(--card);
+  backdrop-filter:var(--blur);
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  border-top-left-radius:25px;
+  border-top-right-radius:25px;
+}
+
+.tabbar span{
+  font-size:22px;
+  opacity:.6;
+}
+.tabbar .active{
+  color:var(--accent);
+  opacity:1;
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  font-size:12px;
+  opacity:.6;
+  margin-top:10px;
+}
+</style>
 </head>
 
-<body class="light">
+<body>
 <div class="app">
 
-<header>
-  <div class="logo">
-    <img src="icon.svg">
-    <h1>Rio Task</h1>
+<header>Rio Task</header>
+
+<div class="card">
+  <div class="task-input">
+    <input id="taskInput" placeholder="New task">
+    <button onclick="addTask()">＋</button>
   </div>
-  <button id="themeBtn">🌙</button>
-</header>
-
-<div class="task-box">
-  <input id="taskInput" placeholder="Add a task...">
-  <button onclick="addTask()">Add</button>
+  <ul id="tasks"></ul>
 </div>
 
-<ul id="taskList"></ul>
+<div class="card">
+  <div class="setting">
+    <span>Dark Mode</span>
+    <div class="switch" onclick="toggleTheme()"></div>
+  </div>
 
-<section class="settings">
-  <h3>⚙ Settings</h3>
+  <div class="setting">
+    <span>Wallpaper</span>
+    <input type="file" accept="image/*" onchange="setWallpaper(event)">
+  </div>
+</div>
 
-  <button onclick="toggleTheme()">Light / Dark</button>
+<footer>Developed by <strong>akashworldwide</strong></footer>
 
-  <select onchange="changeWallpaper(this.value)">
-    <option value="">Default</option>
-    <option value="https://picsum.photos/800/1200?1">Wallpaper 1</option>
-    <option value="https://picsum.photos/800/1200?2">Wallpaper 2</option>
-  </select>
-
-  <input type="file" accept="image/*" onchange="customWallpaper(event)">
-</section>
-
-<footer>
-  Developed by <strong>akashworldwide</strong>
-</footer>
+<div class="tabbar">
+  <span class="active">📝</span>
+  <span>⚙️</span>
+  <span>👤</span>
+</div>
 
 </div>
 
-<script src="app.js"></script>
+<script>
+const list=document.getElementById("tasks")
+let tasks=JSON.parse(localStorage.getItem("rioTasks"))||[]
+
+function render(){
+  list.innerHTML=""
+  tasks.forEach((t,i)=>{
+    const li=document.createElement("li")
+    li.innerHTML=`${t}<span onclick="del(${i})">❌</span>`
+    list.appendChild(li)
+  })
+  localStorage.setItem("rioTasks",JSON.stringify(tasks))
+}
+function addTask(){
+  const v=taskInput.value.trim()
+  if(!v)return
+  tasks.push(v)
+  taskInput.value=""
+  render()
+}
+function del(i){tasks.splice(i,1);render()}
+function toggleTheme(){document.body.classList.toggle("dark")}
+function setWallpaper(e){
+  const r=new FileReader()
+  r.onload=()=>document.body.style.backgroundImage=`url(${r.result})`
+  r.readAsDataURL(e.target.files[0])
+}
+render()
+</script>
+
 </body>
 </html>
