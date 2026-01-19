@@ -1,197 +1,122 @@
-/* ================= ROOT THEME ================= */
+/* ========== ROOT COLORS ========== */
 :root{
-  --bg:#f2f2f7;
-  --card:#ffffffee;
-  --input:#e5e5ea;
-  --text:#000;
-  --subtext:#6b7280;
-  --accent:#007aff;
-  --danger:#ff453a;
-  --blur:blur(20px);
-}
+  --bg-light:#f2f2f7;
+  --bg-dark:#000;
 
-/* ================= DARK MODE ================= */
-body.dark{
-  --bg:#000;
-  --card:#1c1c1eee;
-  --input:#2c2c2e;
-  --text:#ffffff;
-  --subtext:#9ca3af;
+  --card-light:rgba(255,255,255,0.9);
+  --card-dark:rgba(28,28,30,0.95);
+
+  --input-light:#e5e5ea;
+  --input-dark:#2c2c2e;
+
+  --text-light:#000;
+  --text-dark:#fff;
+
+  --subtext-light:#6b7280;
+  --subtext-dark:#9ca3af;
+
   --accent:#0a84ff;
   --danger:#ff453a;
 }
 
-/* ================= GLOBAL ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI";
-}
-
+/* ========== BODY ========== */
 body{
-  min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
-  display:flex;
-  justify-content:center;
-  transition:.3s;
+  background:var(--bg-light);
+  color:var(--text-light);
+  transition:0.3s;
 }
 
-/* ================= APP WRAPPER ================= */
-.app{
-  width:100%;
-  max-width:390px;
-  min-height:100vh;
-  padding-bottom:90px;
+body.dark{
+  background:var(--bg-dark);
+  color:var(--text-dark);
 }
 
-/* ================= HEADER ================= */
-header{
-  padding:20px;
-  font-size:28px;
-  font-weight:700;
-}
-
-/* ================= CARD ================= */
+/* ========== APP CARD ========== */
 .card{
-  margin:15px;
-  background:var(--card);
-  border-radius:22px;
+  background:var(--card-light);
+  border-radius:20px;
   padding:16px;
-  backdrop-filter:var(--blur);
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  margin:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* ================= TASK INPUT ================= */
-.task-input{
-  display:flex;
-  gap:12px;
+body.dark .card{
+  background:var(--card-dark);
 }
 
+/* ========== INPUT ========== */
 .task-input input{
-  flex:1;
+  background:var(--input-light);
+  color:var(--text-light);
+  border:none;
   padding:14px;
-  border:none;
   border-radius:16px;
-  background:var(--input);
-  color:var(--text);
-  font-size:16px;
-  outline:none;
+  width:100%;
 }
 
+body.dark .task-input input{
+  background:var(--input-dark);
+  color:var(--text-dark);
+}
+
+/* Placeholder */
 .task-input input::placeholder{
-  color:var(--subtext);
+  color:var(--subtext-light);
 }
 
-.task-input button{
-  padding:14px 18px;
-  border:none;
-  border-radius:16px;
-  background:var(--accent);
-  color:#fff;
-  font-size:20px;
-  cursor:pointer;
+body.dark .task-input input::placeholder{
+  color:var(--subtext-dark);
 }
 
-/* ================= TASK LIST ================= */
-ul{
-  list-style:none;
-  margin-top:12px;
-}
-
-li{
-  background:var(--input);
-  color:var(--text);
-  padding:14px 16px;
+/* ========== TASK ITEM ========== */
+.task-item{
+  background:var(--input-light);
+  color:var(--text-light);
+  padding:14px;
   border-radius:16px;
   margin-bottom:10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:16px;
+}
+
+body.dark .task-item{
+  background:var(--input-dark);
+  color:var(--text-dark);
 }
 
 /* Delete icon */
-li span{
+.task-item .delete{
   color:var(--danger);
   font-size:20px;
-  cursor:pointer;
 }
 
-/* ================= SETTINGS ================= */
-.setting{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 0;
-  font-size:16px;
-  color:var(--text);
+/* ========== SETTINGS TEXT ========== */
+.settings label,
+.settings span,
+.settings p{
+  color:var(--text-light);
 }
 
-.setting input[type="file"]{
-  color:var(--subtext);
+body.dark .settings label,
+body.dark .settings span,
+body.dark .settings p{
+  color:var(--text-dark);
 }
 
-/* ================= TOGGLE SWITCH ================= */
-.switch{
-  width:48px;
-  height:28px;
-  background:#ccc;
-  border-radius:20px;
-  position:relative;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.switch::after{
-  content:"";
-  width:24px;
-  height:24px;
-  background:#fff;
-  border-radius:50%;
-  position:absolute;
-  top:2px;
-  left:2px;
-  transition:.3s;
-}
-
-body.dark .switch{
+/* ========== BUTTON ========== */
+.add-btn{
   background:var(--accent);
+  color:#fff;
+  border-radius:16px;
 }
 
-body.dark .switch::after{
-  left:22px;
-}
-
-/* ================= TAB BAR ================= */
-.tabbar{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  max-width:390px;
-  background:var(--card);
-  backdrop-filter:var(--blur);
-  display:flex;
-  justify-content:space-around;
-  padding:14px 0;
-  border-top-left-radius:26px;
-  border-top-right-radius:26px;
-}
-
-.tabbar span{
-  font-size:22px;
-  color:var(--subtext);
-}
-
-.tabbar .active{
-  color:var(--accent);
-}
-
-/* ================= FOOTER ================= */
+/* ========== FOOTER ========== */
 footer{
+  color:var(--subtext-light);
   text-align:center;
-  font-size:12px;
-  opacity:.7;
-  margin-top:12px;
+}
+
+body.dark footer{
+  color:var(--subtext-dark);
 }
