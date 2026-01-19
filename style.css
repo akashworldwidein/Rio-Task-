@@ -1,0 +1,22 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{min-height:100vh;transition:.3s;background-size:cover}
+body.light{background:#f4f6f8;color:#000}
+body.dark{background:#0f172a;color:#fff}
+
+.app{max-width:420px;margin:auto;min-height:100vh;padding:15px;background:rgba(255,255,255,.85)}
+body.dark .app{background:rgba(0,0,0,.7)}
+
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:8px}
+.logo img{width:30px}
+
+.task-box{display:flex;gap:10px;margin:15px 0}
+.task-box input{flex:1;padding:10px}
+.task-box button{padding:10px;background:#2563eb;color:#fff;border:none}
+
+ul{list-style:none;margin-top:10px}
+li{padding:8px;background:#e5e7eb;margin-bottom:6px;border-radius:6px}
+
+.settings{margin-top:15px;display:flex;flex-direction:column;gap:10px}
+
+footer{text-align:center;margin-top:20px;font-size:13px;opacity:.8}
