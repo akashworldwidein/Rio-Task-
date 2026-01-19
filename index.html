@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rio Task</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="light">
+<div class="app">
+
+<header>
+  <div class="logo">
+    <img src="icon.svg">
+    <h1>Rio Task</h1>
+  </div>
+  <button id="themeBtn">🌙</button>
+</header>
+
+<div class="task-box">
+  <input id="taskInput" placeholder="Add a task...">
+  <button onclick="addTask()">Add</button>
+</div>
+
+<ul id="taskList"></ul>
+
+<section class="settings">
+  <h3>⚙ Settings</h3>
+
+  <button onclick="toggleTheme()">Light / Dark</button>
+
+  <select onchange="changeWallpaper(this.value)">
+    <option value="">Default</option>
+    <option value="https://picsum.photos/800/1200?1">Wallpaper 1</option>
+    <option value="https://picsum.photos/800/1200?2">Wallpaper 2</option>
+  </select>
+
+  <input type="file" accept="image/*" onchange="customWallpaper(event)">
+</section>
+
+<footer>
+  Developed by <strong>akashworldwide</strong>
+</footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
