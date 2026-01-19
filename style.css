@@ -1,122 +1,105 @@
-/* ========== ROOT COLORS ========== */
-:root{
-  --bg-light:#f2f2f7;
-  --bg-dark:#000;
-
-  --card-light:rgba(255,255,255,0.9);
-  --card-dark:rgba(28,28,30,0.95);
-
-  --input-light:#e5e5ea;
-  --input-dark:#2c2c2e;
-
-  --text-light:#000;
-  --text-dark:#fff;
-
-  --subtext-light:#6b7280;
-  --subtext-dark:#9ca3af;
-
-  --accent:#0a84ff;
-  --danger:#ff453a;
+/* ===== GLOBAL DARK THEME ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-/* ========== BODY ========== */
 body{
-  background:var(--bg-light);
-  color:var(--text-light);
-  transition:0.3s;
+  background:#000;
+  color:#fff;
+  min-height:100vh;
 }
 
-body.dark{
-  background:var(--bg-dark);
-  color:var(--text-dark);
+/* ===== APP CONTAINER "GLASS" ===== */
+.app{
+  max-width:420px;
+  margin:auto;
+  padding:16px;
 }
 
-/* ========== APP CARD ========== */
+/* ===== HEADER ===== */
+h1{
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:16px;
+}
+
+/* ===== CARD ===== */
 .card{
-  background:var(--card-light);
+  background:rgba(28,28,30,0.96);
   border-radius:20px;
   padding:16px;
-  margin:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  margin-bottom:16px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-body.dark .card{
-  background:var(--card-dark);
+/* ===== INPUT ===== */
+.task-input{
+  display:flex;
+  gap:10px;
 }
 
-/* ========== INPUT ========== */
 .task-input input{
-  background:var(--input-light);
-  color:var(--text-light);
+  flex:1;
+  background:#2c2c2e;
+  color:#fff;
   border:none;
   padding:14px;
   border-radius:16px;
-  width:100%;
+  font-size:16px;
 }
 
-body.dark .task-input input{
-  background:var(--input-dark);
-  color:var(--text-dark);
-}
-
-/* Placeholder */
 .task-input input::placeholder{
-  color:var(--subtext-light);
+  color:#9ca3af;
 }
 
-body.dark .task-input input::placeholder{
-  color:var(--subtext-dark);
-}
-
-/* ========== TASK ITEM ========== */
-.task-item{
-  background:var(--input-light);
-  color:var(--text-light);
-  padding:14px;
+.task-input button{
+  background:#0a84ff;
+  color:#fff;
+  border:none;
+  width:52px;
   border-radius:16px;
-  margin-bottom:10px;
+  font-size:26px;
+}
+
+/* ===== TASK ITEM ===== */
+.task-item{
+  background:#2c2c2e;
+  padding:14px 16px;
+  border-radius:16px;
+  margin-top:10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-body.dark .task-item{
-  background:var(--input-dark);
-  color:var(--text-dark);
-}
-
-/* Delete icon */
-.task-item .delete{
-  color:var(--danger);
+.task-item span{
+  color:#ff453a;
   font-size:20px;
+  cursor:pointer;
 }
 
-/* ========== SETTINGS TEXT ========== */
-.settings label,
-.settings span,
-.settings p{
-  color:var(--text-light);
-}
-
-body.dark .settings label,
-body.dark .settings span,
-body.dark .settings p{
-  color:var(--text-dark);
-}
-
-/* ========== BUTTON ========== */
-.add-btn{
-  background:var(--accent);
+/* ===== SETTINGS ===== */
+.settings label{
+  display:block;
+  margin-bottom:8px;
   color:#fff;
-  border-radius:16px;
 }
 
-/* ========== FOOTER ========== */
+.settings input[type="file"]{
+  background:#2c2c2e;
+  color:#fff;
+  padding:10px;
+  border-radius:12px;
+}
+
+/* ===== FOOTER ===== */
 footer{
-  color:var(--subtext-light);
   text-align:center;
-}
-
-body.dark footer{
-  color:var(--subtext-dark);
+  font-size:12px;
+  color:#9ca3af;
+  margin-top:20px;
 }
