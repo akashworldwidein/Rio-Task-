@@ -1,22 +1,197 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{min-height:100vh;transition:.3s;background-size:cover}
-body.light{background:#f4f6f8;color:#000}
-body.dark{background:#0f172a;color:#fff}
+/* ================= ROOT THEME ================= */
+:root{
+  --bg:#f2f2f7;
+  --card:#ffffffee;
+  --input:#e5e5ea;
+  --text:#000;
+  --subtext:#6b7280;
+  --accent:#007aff;
+  --danger:#ff453a;
+  --blur:blur(20px);
+}
 
-.app{max-width:420px;margin:auto;min-height:100vh;padding:15px;background:rgba(255,255,255,.85)}
-body.dark .app{background:rgba(0,0,0,.7)}
+/* ================= DARK MODE ================= */
+body.dark{
+  --bg:#000;
+  --card:#1c1c1eee;
+  --input:#2c2c2e;
+  --text:#ffffff;
+  --subtext:#9ca3af;
+  --accent:#0a84ff;
+  --danger:#ff453a;
+}
 
-header{display:flex;justify-content:space-between;align-items:center}
-.logo{display:flex;align-items:center;gap:8px}
-.logo img{width:30px}
+/* ================= GLOBAL ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI";
+}
 
-.task-box{display:flex;gap:10px;margin:15px 0}
-.task-box input{flex:1;padding:10px}
-.task-box button{padding:10px;background:#2563eb;color:#fff;border:none}
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  display:flex;
+  justify-content:center;
+  transition:.3s;
+}
 
-ul{list-style:none;margin-top:10px}
-li{padding:8px;background:#e5e7eb;margin-bottom:6px;border-radius:6px}
+/* ================= APP WRAPPER ================= */
+.app{
+  width:100%;
+  max-width:390px;
+  min-height:100vh;
+  padding-bottom:90px;
+}
 
-.settings{margin-top:15px;display:flex;flex-direction:column;gap:10px}
+/* ================= HEADER ================= */
+header{
+  padding:20px;
+  font-size:28px;
+  font-weight:700;
+}
 
-footer{text-align:center;margin-top:20px;font-size:13px;opacity:.8}
+/* ================= CARD ================= */
+.card{
+  margin:15px;
+  background:var(--card);
+  border-radius:22px;
+  padding:16px;
+  backdrop-filter:var(--blur);
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+/* ================= TASK INPUT ================= */
+.task-input{
+  display:flex;
+  gap:12px;
+}
+
+.task-input input{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:var(--input);
+  color:var(--text);
+  font-size:16px;
+  outline:none;
+}
+
+.task-input input::placeholder{
+  color:var(--subtext);
+}
+
+.task-input button{
+  padding:14px 18px;
+  border:none;
+  border-radius:16px;
+  background:var(--accent);
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* ================= TASK LIST ================= */
+ul{
+  list-style:none;
+  margin-top:12px;
+}
+
+li{
+  background:var(--input);
+  color:var(--text);
+  padding:14px 16px;
+  border-radius:16px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:16px;
+}
+
+/* Delete icon */
+li span{
+  color:var(--danger);
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* ================= SETTINGS ================= */
+.setting{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  font-size:16px;
+  color:var(--text);
+}
+
+.setting input[type="file"]{
+  color:var(--subtext);
+}
+
+/* ================= TOGGLE SWITCH ================= */
+.switch{
+  width:48px;
+  height:28px;
+  background:#ccc;
+  border-radius:20px;
+  position:relative;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.switch::after{
+  content:"";
+  width:24px;
+  height:24px;
+  background:#fff;
+  border-radius:50%;
+  position:absolute;
+  top:2px;
+  left:2px;
+  transition:.3s;
+}
+
+body.dark .switch{
+  background:var(--accent);
+}
+
+body.dark .switch::after{
+  left:22px;
+}
+
+/* ================= TAB BAR ================= */
+.tabbar{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  max-width:390px;
+  background:var(--card);
+  backdrop-filter:var(--blur);
+  display:flex;
+  justify-content:space-around;
+  padding:14px 0;
+  border-top-left-radius:26px;
+  border-top-right-radius:26px;
+}
+
+.tabbar span{
+  font-size:22px;
+  color:var(--subtext);
+}
+
+.tabbar .active{
+  color:var(--accent);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  font-size:12px;
+  opacity:.7;
+  margin-top:12px;
+}
